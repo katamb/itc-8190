@@ -4,6 +4,14 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Sources used for help/inspiration:
+ * https://www.youtube.com/watch?v=HvMSRWTE2mI&ab_channel=Numberphile
+ * https://en.wikipedia.org/wiki/AKS_primality_test
+ * https://www.geeksforgeeks.org/aks-primality-test/
+ * https://en.wikipedia.org/wiki/Pascal%27s_triangle
+ * https://www.geeksforgeeks.org/pascal-triangle/
+ */
 public class AKS {
 
     /**
