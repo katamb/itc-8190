@@ -20,7 +20,7 @@ public class SimplePrimality {
 
     public static void main(String[] args) {
         // Input value to test here
-        Boolean result = isPrime(13127);
+        Boolean result = isPrime(33469);
         if (result == null) {
             System.out.println("Unexpected input");
         } else if (result) {
@@ -29,6 +29,6 @@ public class SimplePrimality {
             System.out.println("Not Prime");
         }
     }
-    // 33.3sec for 13127
-    // 7min 31.8sec for 33469
+    // 490ms for 13127
+    // 1.2sec for 33469
 }
