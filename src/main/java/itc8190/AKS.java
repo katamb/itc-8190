@@ -63,9 +63,10 @@ public class AKS {
             System.out.println("Only natural numbers are allowed as input");
             return null;
         }
+
         // coefficients for (x-1)^n
         List<BigInteger> coefficients = findCoefficients(testValue);
-        Integer coefficientListSize = coefficients.size();
+        int coefficientListSize = coefficients.size();
 
         // Loop over the coefficients and check one-by-one if they are divisible by the input number
         // while adjusting coefficients for (x-1)^n - (x^n-1) = (x-1)^n - x^n + 1
@@ -87,7 +88,7 @@ public class AKS {
 
     public static void main(String[] args) {
         // Input value to test here
-        Boolean result = isPrimeByAKS(6131);
+        Boolean result = isPrimeByAKS(13129);
         if (result == null) {
             System.out.println("Unexpected input");
         } else if (result) {
@@ -96,4 +97,6 @@ public class AKS {
             System.out.println("Not Prime");
         }
     }
+    // 33.3sec for 13127
+    // 7min 31.8sec for 33469
 }
