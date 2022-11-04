@@ -1,15 +1,18 @@
 package itc8190;
 
+import java.math.BigInteger;
+
 public class SimplePrimality {
 
-    static Boolean isPrime(Integer testValue) {
-        if (testValue == null || testValue < 0) {
+    static Boolean isPrime(BigInteger input) {
+        if (BigInteger.ZERO.compareTo(input) > 0) {
             System.out.println("Only natural numbers are allowed as input");
             return null;
         }
 
-        for (int i = 2; i < testValue; i++) {
-            if (testValue % i == 0) {
+        BigInteger maxTestValue = input.sqrt();
+        for (BigInteger i = BigInteger.valueOf(2); i.compareTo(maxTestValue) <= 0; i = i.add(BigInteger.ONE)) {
+            if (input.mod(i).compareTo(BigInteger.ZERO) == 0) {
                 return false;
             }
         }
@@ -20,7 +23,7 @@ public class SimplePrimality {
 
     public static void main(String[] args) {
         // Input value to test here
-        Boolean result = isPrime(33469);
+        Boolean result = isPrime(new BigInteger("306680863762905727"));
         if (result == null) {
             System.out.println("Unexpected input");
         } else if (result) {
@@ -29,6 +32,8 @@ public class SimplePrimality {
             System.out.println("Not Prime");
         }
     }
-    // 490ms for 13127
-    // 1.2sec for 33469
+    // ~350ms for 13127
+    // ~400ms for 33469
+    // ~440ms for 1312783547
+    // ~16sec for 306680863762905727
 }
