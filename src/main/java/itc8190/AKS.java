@@ -32,12 +32,15 @@ public class AKS {
             return true;
         }
 
-        System.out.println("random"); // todo remove after implementing step 5
-        // todo Step 5
-        return false;
+        // Step 5
+        for (BigInteger a = BigInteger.ONE; a.compareTo(AKSCore.findLimit(input, r)) <= 0; a = a.add(BigInteger.ONE)) {
+            if (AKSCore.arePolynomialsDivisible(a, input, r)) {
+                return false;
+            }
+        }
 
         // Step 6
-        // return true;
+         return true;
     }
 
     public static void main(String[] args) {
