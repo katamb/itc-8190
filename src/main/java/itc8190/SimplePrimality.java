@@ -23,7 +23,7 @@ public class SimplePrimality {
 
     public static void main(String[] args) {
         // Input value to test here
-        Boolean result = isPrime(new BigInteger("306680863762905727"));
+        Boolean result = isPrime(new BigInteger("1312783547"));
         if (result == null) {
             System.out.println("Unexpected input");
         } else if (result) {

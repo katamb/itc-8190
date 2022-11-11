@@ -40,6 +40,6 @@ public class FindR {
     }
 
     public static void main(String[] args) {
-        System.out.println(findR(new BigInteger("31")));
+        System.out.println(findR(new BigInteger("3131")));
     }
 }

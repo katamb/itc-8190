@@ -34,7 +34,7 @@ public class AKS {
 
         // Step 5
         for (BigInteger a = BigInteger.ONE; a.compareTo(AKSCore.findLimit(input, r)) <= 0; a = a.add(BigInteger.ONE)) {
-            if (AKSCore.arePolynomialsDivisible(a, input, r)) {
+            if (!AKSCore.arePolynomialsDivisible(a, input, r)) {
                 return false;
             }
         }
@@ -44,6 +44,6 @@ public class AKS {
     }
 
     public static void main(String[] args) {
-        System.out.println(isPrime(new BigInteger("31")));
+        System.out.println(isPrime(new BigInteger("2147483647")));
     }
 }
