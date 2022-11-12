@@ -1,5 +1,6 @@
-package itc8190;
+package itc8190.bigint;
 
+import itc8190.bigint.PerfectPower;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

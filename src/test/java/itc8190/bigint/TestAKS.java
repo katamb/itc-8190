@@ -1,6 +1,7 @@
-package itc8190;
+package itc8190.bigint;
 
-import org.junit.jupiter.api.Test;
+import itc8190.bigint.AKS;
+import itc8190.bigint.SimplePrimality;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -24,29 +25,4 @@ public class TestAKS {
         assertThat(AKS.isPrime(BigInteger.valueOf(number))).isTrue();
     }
 
-    //@Test
-    void testtt() {
-        System.out.println("start");
-
-        long startTime = System.nanoTime();
-        for (long a = 2; a < 1000L; a++) {
-            AKS.isPrime(BigInteger.valueOf(a));
-        }
-        long endTime = System.nanoTime();
-        long duration = (endTime - startTime);
-        System.out.println(duration);
-
-
-        startTime = System.nanoTime();
-        for (long a = 2; a < 1000L; a++) {
-            SimplePrimality.isPrime(BigInteger.valueOf(a));
-        }
-        endTime = System.nanoTime();
-        duration = (endTime - startTime);
-        System.out.println(duration);
-
-        for (long a = 2; a < 1000L; a++) {
-            assertThat(AKS.isPrime(BigInteger.valueOf(a))).isEqualTo(SimplePrimality.isPrime(BigInteger.valueOf(a)));
-        }
-    }
 }

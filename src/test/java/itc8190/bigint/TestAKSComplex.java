@@ -1,4 +1,4 @@
-package itc8190;
+package itc8190.bigint;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

@@ -2,6 +2,7 @@ package itc8190.primitive;
 
 public class AKS {
 
+    // https://www.jstor.org/stable/3597229?seq=1#metadata_info_tab_contents
     // https://en.wikipedia.org/wiki/AKS_primality_test
     // https://link.springer.com/content/pdf/10.1007/b12334.pdf
     public static boolean isPrime(long input) {

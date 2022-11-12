@@ -1,14 +1,10 @@
-package itc8190;
-
-import org.checkerframework.checker.units.qual.A;
+package itc8190.bigint;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Optional.ofNullable;
 
 /**
  * Based on:
@@ -18,30 +14,28 @@ import static java.util.Optional.ofNullable;
 public class AKSCore {
 
     static boolean arePolynomialsDivisible(BigInteger a, BigInteger n, BigInteger r) {
-        //List<BigInteger> polynomials = new ArrayList<>(); // todo implement function
-        List<BigInteger> remainders = findPolynomialRemainders(a, n, r); // todo implement function
+        List<BigInteger> remainders = findPolynomialRemainders(a, n, r);
         remainders.set(n.mod(r).intValue(), remainders.get(n.mod(r).intValue()).subtract(BigInteger.ONE));
         remainders.set(0, remainders.get(0).subtract(a));
         return remainders.stream().allMatch(rem -> rem.compareTo(BigInteger.ZERO) == 0);
     }
 
     static List<BigInteger> findPolynomialRemainders(BigInteger a, BigInteger n, BigInteger r) {
-        List<BigInteger> poly1 = new ArrayList<>();
-        poly1.add(a);
-        poly1.add(BigInteger.ONE);
-        List<BigInteger> poly2 = new ArrayList<>();
-        poly2.add(BigInteger.ONE);
-        // fixme, wrong polynomial at wrong place
+        List<BigInteger> remainders = new ArrayList<>();
+        remainders.add(BigInteger.ONE);
+        List<BigInteger> base = new ArrayList<>();
+        base.add(a);
+        base.add(BigInteger.ONE);
 
         BigInteger counter = n;
         while (counter.compareTo(BigInteger.ZERO) > 0) {
             if (counter.testBit(0)) {  // check if odd number
-                poly1 = multiplyPolynomials(poly1, poly2, n, r);
+                remainders = multiplyPolynomials(remainders, base, n, r);
             }
-            poly2 = multiplyPolynomials(poly2, poly2, n, r);
+            base = multiplyPolynomials(base, base, n, r);
             counter = counter.shiftRight(1);  // divide by 2
         }
-        return poly1;
+        return remainders;
     }
 
     static List<BigInteger> multiplyPolynomials(
@@ -52,13 +46,15 @@ public class AKSCore {
 
         for (int i = 0; i < r.intValue(); i++) {
             polyResult.add(BigInteger.ZERO);
+            if (i > r.intValue() - 2) {
+                break;
+            }
         }
 
         for (int i = 0; i < poly1.size(); i++) {
             for (int j = 0; j < poly2.size(); j++) {
                 int pos = (i + j) % r.intValue();
                 polyResult.set(pos, polyResult.get(pos).add(poly1.get(i).multiply(poly2.get(j))).mod(n));
-                //polyResult.set(pos, polyResult.get(pos).mod(n));
             }
         }
         return polyResult;

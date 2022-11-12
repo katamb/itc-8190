@@ -6,7 +6,9 @@ import java.util.List;
 public class LongMath {
 
     /**
-     * Find the smallest r such that ord_r(n) > (log_2 n)^2. (if r and n are not co-prime, then skip this r)
+     * Based on: https://en.wikipedia.org/wiki/AKS_primality_test
+     * Find the smallest r such that ord_r(n) > (log_2 n)^2.
+     * O(log(n)^5*log(n)^2*log(n)^2 * log(n)^5) = O(log(n)^12)
      */
     static long findR(long input) {
         double log2OfInput = logBaseTwo(input);
@@ -15,13 +17,14 @@ public class LongMath {
         long r = 1L;
         boolean nextR = true;
 
-        while (nextR) {
+        while (nextR) {  // worst case: O(log(n)^5)
             r++;
             nextR = false;
             long k = 0;
-            while (k <= maxK && !nextR) {
+            // use opposite logic, if k is larger than maxK, we break out of the loop and return the r
+            while (k <= maxK && !nextR) {  // worst case: O(log(n)^2)
                 k++;
-                long x = modPow(input, k, r);
+                long x = modPow(input, k, r);  // worst case: O(log(n)^2 * log(n)^5)
                 if (x == 0 || x == 1) {
                     nextR = true;
                 }
@@ -34,6 +37,7 @@ public class LongMath {
     /**
      * https://link.springer.com/content/pdf/10.1007/b12334.pdf pages 19-20
      * Calculate n^k mod r
+     * O(log(k)log(r))
      */
     private static long modPow(long n, long k, long r) {
         long s = n % r;
@@ -50,7 +54,7 @@ public class LongMath {
 
     /**
      * Find gcd of inputs using Euclidean algorithm
-     * O(log(a)log(b))
+     * O(log(a)log(b)) = O(log(n))
      */
     static long findGcd(long a, long b) {
         while (b != 0) {
@@ -67,10 +71,6 @@ public class LongMath {
      * According to the author, complexity should be: O((log n)^2 log log n)
      */
     static boolean isPerfectPower(long input) {
-        if (input == 1) {
-            return true;  // Currently means 1 would not be considered prime
-        }
-
         int exponent = 2;
         while (Math.pow(2, exponent) <= input) {
             if (binarySearch(exponent, input)) {
@@ -131,9 +131,12 @@ public class LongMath {
     }
 
     static boolean arePolynomialsDivisible(long a, long n, long r) {
+        // (x + a)^n (mod n)
         List<Long> remainders = findPolynomialRemainders(a, n, r);
-        // subtract the rest
+        // subtract the (x^n + a) from the result of (x + a)^n (mod n), meaning: ((x + a)^n (mod n)) - x^n - a
+        // (x + a)^n (mod n) - x^n
         remainders.set((int) (n % r), remainders.get((int) (n % r)) - 1L);
+        // (x + a)^n (mod n) - a
         remainders.set(0, remainders.get(0) - a);
         return remainders.stream().allMatch(remainder -> remainder == 0);
     }
