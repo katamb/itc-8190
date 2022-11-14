@@ -33,7 +33,8 @@ public class AKS {
         }
 
         // Step 5
-        for (long a = 1L; a <= LongMath.findLimit(input, r); a++) {
+        long limit = LongMath.findLimit(input, r);
+        for (long a = 1L; a <= limit; a++) {
             if (!LongMath.arePolynomialsDivisible(a, input, r)) {
                 return false;
             }
@@ -44,6 +45,6 @@ public class AKS {
     }
 
     public static void main(String[] args) {
-        System.out.println(isPrime(2971781927L));
+        System.out.println(isPrime(29717813L));
     }
 }

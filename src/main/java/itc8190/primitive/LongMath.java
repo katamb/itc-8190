@@ -8,7 +8,7 @@ public class LongMath {
     /**
      * Based on: https://en.wikipedia.org/wiki/AKS_primality_test
      * Find the smallest r such that ord_r(n) > (log_2 n)^2.
-     * O(log(n)^5*log(n)^2*log(n)^2 * log(n)^5) = O(log(n)^12)
+     * O(log(n)^5 * log(n)^2 * log(log(n)^2) * log(log(n)^5)) =~ O(log(n)^7)
      */
     static long findR(long input) {
         double log2OfInput = logBaseTwo(input);
@@ -37,7 +37,7 @@ public class LongMath {
     /**
      * https://link.springer.com/content/pdf/10.1007/b12334.pdf pages 19-20
      * Calculate n^k mod r
-     * O(log(k)log(r))
+     * O(log(k)log(r)^2)
      */
     private static long modPow(long n, long k, long r) {
         long s = n % r;
@@ -68,7 +68,7 @@ public class LongMath {
     /**
      * Based on "Primality Testing in Polynomial Time": https://link.springer.com/content/pdf/10.1007/b12334.pdf - page 21
      * Check if the number is a perfect power
-     * According to the author, complexity should be: O((log n)^2 log log n)
+     * According to the author, complexity should be: O((log n)^3)
      */
     static boolean isPerfectPower(long input) {
         int exponent = 2;
@@ -84,7 +84,7 @@ public class LongMath {
 
     /**
      * Binary search for the perfect power
-     * Complexity O(log n)
+     * Complexity O(log n)^2
      */
     private static boolean binarySearch(int exponent, long input) {
         long min = 1;
